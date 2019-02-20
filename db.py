@@ -78,5 +78,5 @@ def get_student(student_id):
         with conn.cursor() as curs:
             curs.execute("select * from student where student.id = %s",
                          (student_id,))
-            selected_student = curs.fetchall()
-            return selected_student[0][1]   
+            received_student = curs.fetchall()
+            return received_student[0][1]   

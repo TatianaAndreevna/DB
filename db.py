@@ -50,13 +50,13 @@ def add_students(course_id, students):
         with psycopg2.connect('dbname=%s user=%s' % (DATABASE, USER)) \
                 as conn:
             with conn.cursor() as curs:
-                insert_statement = 'insert into student (%s) values %s returning id'
-                curs.execute(curs.mogrify(insert_statement,
+                insert_st = 'insert into student (%s) values %s returning id'
+                curs.execute(curs.mogrify(insert_st,
                                           (AsIs(','.join(columns)),
                                            tuple(values))))
-                st_id = curs.fetchone()[0]
+                student_id = curs.fetchone()[0]
                 curs.execute("insert into student_course (student_id, course_id) values (%s, %s)",
-                             (st_id, course_id))
+                             (student_id, course_id))
 
 
 # просто создает студента
@@ -66,8 +66,8 @@ def add_student(student):
     with psycopg2.connect('dbname=%s user=%s' % (DATABASE, USER)) \
             as conn:
         with conn.cursor() as curs:
-            insert_statement = 'insert into student (%s) values %s'
-            curs.execute(curs.mogrify(insert_statement,
+            insert_st = 'insert into student (%s) values %s'
+            curs.execute(curs.mogrify(insert_st,
                                       (AsIs(','.join(columns)),
                                        tuple(values))))
 

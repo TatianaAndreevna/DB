@@ -80,3 +80,19 @@ def get_student(student_id):
                          (student_id,))
             received_student = curs.fetchall()
             return received_student[0][1]   
+
+        
+if __name__ == '__main__':
+    create_db()
+    student_1 = {
+        'name': 'Tatiana',
+        'gpa': 10.2,
+        'birth': '1994-10-12'
+    }
+    student_2 = {
+        'name': 'Steve',
+        'gpa': 7.4,
+        'birth': '1982-06-05'
+    }
+    add_student(student_1)
+    add_student(student_2)
